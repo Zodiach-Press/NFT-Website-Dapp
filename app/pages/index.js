@@ -37,7 +37,7 @@ export default function Home() {
       );
       // call the presaleMint from the contract, only whitelisted addresses would be able to mint
       const tx = await whitelistContract.presaleMint({
-        // value signifies the cost of one crypto dev which is "0.01" eth.
+        // value signifies the cost of one NFT which is "0.01" eth.
         // We are parsing `0.01` string to ether using the utils library from ethers.js
         value: utils.parseEther("0.01"),
       });
@@ -45,7 +45,7 @@ export default function Home() {
       // wait for the transaction to get mined
       await tx.wait();
       setLoading(false);
-      window.alert("You successfully minted a Crypto Dev!");
+      window.alert("You successfully minted an NFT from Ƶodiach Mountain!");
     } catch (err) {
       console.error(err);
     }
@@ -65,9 +65,9 @@ export default function Home() {
         abi,
         signer
       );
-      // call the mint from the contract to mint the Crypto Dev
+      // call the mint from the contract to mint the NFT
       const tx = await whitelistContract.mint({
-        // value signifies the cost of one crypto dev which is "0.01" eth.
+        // value signifies the cost of one NFT which is default "0.01" eth.
         // We are parsing `0.01` string to ether using the utils library from ethers.js
         value: utils.parseEther("0.01"),
       });
@@ -75,7 +75,7 @@ export default function Home() {
       // wait for the transaction to get mined
       await tx.wait();
       setLoading(false);
-      window.alert("You successfully minted a Crypto Dev!");
+      window.alert("You successfully minted an NFT from Ƶodiach Mountain!");
     } catch (err) {
       console.error(err);
     }
@@ -241,11 +241,11 @@ export default function Home() {
     const provider = await web3ModalRef.current.connect();
     const web3Provider = new providers.Web3Provider(provider);
 
-    // If user is not connected to the Rinkeby network, let them know and throw an error
+    // If user is not connected to the Goerli network, let them know and throw an error
     const { chainId } = await web3Provider.getNetwork();
-    if (chainId !== 4) {
-      window.alert("Change the network to Rinkeby");
-      throw new Error("Change network to Rinkeby");
+    if (chainId !== 5) {
+      window.alert("Change the network to Goerli");
+      throw new Error("Change network to Goerli");
     }
 
     if (needSigner) {
@@ -264,7 +264,7 @@ export default function Home() {
       // Assign the Web3Modal class to the reference object by setting it's `current` value
       // The `current` value is persisted throughout as long as this page is open
       web3ModalRef.current = new Web3Modal({
-        network: "rinkeby",
+        network: "goerli",
         providerOptions: {},
         disableInjectedProvider: false,
       });
@@ -327,7 +327,7 @@ export default function Home() {
     if (!presaleStarted) {
       return (
         <div>
-          <div className={styles.description}>Presale hasnt started!</div>
+          <div className={styles.description}>Presale hasn't yet begun!</div>
         </div>
       );
     }
@@ -337,8 +337,9 @@ export default function Home() {
       return (
         <div>
           <div className={styles.description}>
-            Presale has started!!! If your address is whitelisted, Mint a
-            Crypto Dev 🥳
+            Presale has started!!! If your address is whitelisted, 
+            Mint an NFT from 
+            ♓♈♉♊♋♌ Ƶodiach Mountain ♍♎♏♐♑♒
           </div>
           <button className={styles.button} onClick={presaleMint}>
             Presale Mint 🚀
@@ -360,29 +361,37 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Crypto Devs</title>
+        <title>Ƶodiach Mountain</title>
         <meta name="description" content="Whitelist-Dapp" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="./images/Zodiach-Z.png" />
+
       </Head>
+        <div align="center">
+          <h2>♓♈♉♊♋♌ Ƶodiach Mountain ♍♎♏♐♑♒</h2>
+        </div>
       <div className={styles.main}>
-        <div>
-          <h1 className={styles.title}>Welcome to Crypto Devs!</h1>
+        <div align="center">
+          <h1 className={styles.title}>Welcome to the inner sanctum!</h1>
           <div className={styles.description}>
-            Its an NFT collection for developers in Crypto.
+            Here you will find <br />
+            strange, dark, and mysterious<br />
+            NFT collections of <br/>
+            Ƶodiach Mountain's AI art.
           </div>
           <div className={styles.description}>
-            {tokenIdsMinted}/20 have been minted
+            {tokenIdsMinted}/4900 have been claimed
           </div>
           {renderButton()}
         </div>
         <div>
-          <img className={styles.image} src="./cryptodevs/0.svg" />
+          <img className={styles.image} src="./images/Halloween2022.png"/>
         </div>
       </div>
 
       <footer className={styles.footer}>
-        Made with &#10084; by Crypto Devs
+        All artwork copyrighted by Jeffrey Anthony 2022-2023
       </footer>
     </div>
+    
   );
 }
